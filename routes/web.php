@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/logs/{id}/pdf', [\App\Http\Controllers\PdfController::class, 'downloadImportLog'])
+    ->name('logs.pdf');
+
+// Form Pendataan Mandiri PSE (Public Form)
+Route::get('/pendataan-pse', [\App\Http\Controllers\PseSubmissionController::class, 'index'])
+    ->name('pse.submit.index');
+Route::post('/pendataan-pse', [\App\Http\Controllers\PseSubmissionController::class, 'store'])
+    ->name('pse.submit.store');
+
