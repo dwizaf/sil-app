@@ -51,11 +51,13 @@ class OpdDrivesTable
                     ->color('info')
                     ->url(fn (\App\Models\OpdDrive $record): ?string => $record->gdrive_link)
                     ->openUrlInNewTab(),
-                EditAction::make(),
+                EditAction::make()
+                    ->visible(fn () => auth()->user()?->canModifyData()),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
-                    DeleteBulkAction::make(),
+                    DeleteBulkAction::make()
+                        ->visible(fn () => auth()->user()?->canModifyData()),
                 ]),
             ]);
     }

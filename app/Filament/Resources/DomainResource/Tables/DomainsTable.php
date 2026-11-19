@@ -150,12 +150,15 @@ class DomainsTable
             ])
             ->actions([
                 \Filament\Actions\ViewAction::make(),
-                \Filament\Actions\EditAction::make(),
-                \Filament\Actions\DeleteAction::make(),
+                \Filament\Actions\EditAction::make()
+                    ->visible(fn () => auth()->user()?->canModifyData()),
+                \Filament\Actions\DeleteAction::make()
+                    ->visible(fn () => auth()->user()?->canModifyData()),
             ])
             ->bulkActions([
                 \Filament\Actions\BulkActionGroup::make([
-                    \Filament\Actions\DeleteBulkAction::make(),
+                    \Filament\Actions\DeleteBulkAction::make()
+                        ->visible(fn () => auth()->user()?->canModifyData()),
                 ]),
             ])
             ->headerActions([
@@ -169,6 +172,7 @@ class DomainsTable
                     ->label('Import Cloudflare Excel')
                     ->icon('heroicon-o-arrow-up-tray')
                     ->color('primary')
+                    ->visible(fn () => auth()->user()?->canModifyData())
                     ->form([
                         Forms\Components\FileUpload::make('excel_file')
                             ->label('File Excel Cloudflare')

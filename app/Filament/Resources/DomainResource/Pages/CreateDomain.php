@@ -10,6 +10,11 @@ class CreateDomain extends CreateRecord
 {
     protected static string $resource = DomainResource::class;
 
+    public static function canAccess(array $parameters = []): bool
+    {
+        return auth()->user()?->canModifyData() ?? false;
+    }
+
     /**
      * Setelah domain dibuat, auto-detect kategori jika belum diisi.
      */

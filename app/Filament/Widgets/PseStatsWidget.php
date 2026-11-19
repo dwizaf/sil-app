@@ -2,6 +2,7 @@
 
 namespace App\Filament\Widgets;
 
+use App\Filament\Resources\Pses\PseResource;
 use Filament\Widgets\StatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
@@ -12,16 +13,20 @@ class PseStatsWidget extends StatsOverviewWidget
 
     protected function getStats(): array
     {
+        $pseUrl = PseResource::getUrl('index');
+
         return [
             Stat::make('PSE Terdaftar', \App\Models\Pse::where('status', 'terdaftar')->count())
                 ->description('Penyelenggara Sistem Elektronik (Komdigi)')
                 ->descriptionIcon('heroicon-m-shield-check')
-                ->color('success'),
-            
+                ->color('success')
+                ->url($pseUrl . '?tableFilters[status][value]=terdaftar'),
+
             Stat::make('PSE Belum/Diproses', \App\Models\Pse::where('status', '!=', 'terdaftar')->count())
                 ->description('Menunggu pendaftaran/sertifikat')
                 ->descriptionIcon('heroicon-m-clock')
-                ->color('warning'),
+                ->color('warning')
+                ->url($pseUrl),
         ];
     }
 }

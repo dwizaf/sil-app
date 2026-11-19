@@ -10,6 +10,11 @@ class EditPse extends EditRecord
 {
     protected static string $resource = PseResource::class;
 
+    public static function canAccess(array $parameters = []): bool
+    {
+        return auth()->user()?->canModifyData() ?? false;
+    }
+
     protected function getHeaderActions(): array
     {
         return [

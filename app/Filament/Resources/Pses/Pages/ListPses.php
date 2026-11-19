@@ -13,7 +13,14 @@ class ListPses extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            \Filament\Actions\Action::make('public_form')
+                ->label('Buka Form Public OPD')
+                ->icon('heroicon-o-arrow-top-right-on-square')
+                ->color('success')
+                ->url(url('/pendataan-pse'))
+                ->openUrlInNewTab(),
+            CreateAction::make()
+                ->visible(fn () => auth()->user()?->canModifyData()),
         ];
     }
 }

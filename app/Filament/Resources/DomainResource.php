@@ -61,4 +61,24 @@ class DomainResource extends Resource
     {
         return 'success';
     }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()?->canModifyData() ?? false;
+    }
+
+    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->user()?->canModifyData() ?? false;
+    }
+
+    public static function canDelete(\Illuminate\Database\Eloquent\Model $record): bool
+    {
+        return auth()->user()?->canModifyData() ?? false;
+    }
+
+    public static function canDeleteAny(): bool
+    {
+        return auth()->user()?->canModifyData() ?? false;
+    }
 }

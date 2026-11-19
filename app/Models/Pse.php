@@ -41,4 +41,14 @@ class Pse extends Model
         'badge_image',
         'certificate_pdf',
     ];
+
+    protected $casts = [
+        'personal_data_processed' => 'array',
+        'req_security' => 'boolean',
+        'req_protection' => 'boolean',
+        'req_personal_data' => 'boolean',
+        'req_feasibility' => 'boolean',
+        'req_spbe' => 'boolean',
+        'registration_date' => 'date',
+    ];
 }

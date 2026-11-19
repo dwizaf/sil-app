@@ -10,6 +10,11 @@ class EditEmail extends EditRecord
 {
     protected static string $resource = EmailResource::class;
 
+    public static function canAccess(array $parameters = []): bool
+    {
+        return auth()->user()?->canModifyData() ?? false;
+    }
+
     protected function getHeaderActions(): array
     {
         return [

@@ -8,4 +8,9 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateEmail extends CreateRecord
 {
     protected static string $resource = EmailResource::class;
+
+    public static function canAccess(array $parameters = []): bool
+    {
+        return auth()->user()?->canModifyData() ?? false;
+    }
 }

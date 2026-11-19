@@ -15,7 +15,8 @@ class ListDomains extends ListRecords
         return [
             Actions\CreateAction::make()
                 ->label('Tambah Domain')
-                ->icon('heroicon-o-plus'),
+                ->icon('heroicon-o-plus')
+                ->visible(fn () => auth()->user()?->canModifyData()),
         ];
     }
 }
